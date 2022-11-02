@@ -1,22 +1,34 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 import sys
 
-class Window():
+class Application(QApplication):
+
+    def __init__(self):
+        super().__init__(sys.argv)
+    
+class Window(QMainWindow):
     
     def __init__(self):
-        self.xPos = None
-        self.yPos = None
+        super().__init__()
+
+        self.xPos = 200
+        self.yPos = 200
+        self.width = 300
+        self.height = 300
+        self.title = "Test"
+
+        self.setGeometry(self.xPos, self.yPos, self.width, self.height)
+        self.setWindowTitle(self.title)
+
+class Label(QLabel):
+    def __init__(self):
+        super().__init__()
+
+        self.xPos = 100
+        self.yPos = 100
         self.width = None
         self.height = None
-        self.title = None
+        self.text = "Test"
 
-    def windowStart(self):
-        app = QApplication(sys.argv)
-        win = QMainWindow()
-    
-        win.setGeometry(self.xPos, self.yPos, self.width, self.height)
-        win.setWindowTitle(self.title)
-
-        win.show()
-        sys.exit(app.exec_())
+        self.move(self.xPos, self.yPos)
