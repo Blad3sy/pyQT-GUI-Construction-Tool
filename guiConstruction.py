@@ -1,3 +1,5 @@
+from http.client import PARTIAL_CONTENT
+from multiprocessing import parent_process
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 import sys
@@ -22,13 +24,13 @@ class Window(QMainWindow):
         self.setWindowTitle(self.title)
 
 class Label(QLabel):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        QLabel.__init__(self, parent)
 
-        self.xPos = 100
-        self.yPos = 100
+        self.xPos = 50
+        self.yPos = 50
         self.width = None
         self.height = None
         self.text = "Test"
 
-        self.move(self.xPos, self.yPos)
+        self.setText(self.text)
