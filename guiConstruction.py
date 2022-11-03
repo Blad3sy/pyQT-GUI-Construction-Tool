@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtGui import QPixmap
 import sys
 
 class Application(QApplication):
@@ -25,16 +26,34 @@ class Window(QMainWindow):
 
 class Label(QLabel):
     
-    def __init__(self, parent, text, xPos, yPos):
+    def __init__(self, parent, text, xPos, yPos, width, height):
         QLabel.__init__(self, parent)
 
         self.xPos = xPos
         self.yPos = yPos
-        self.width = None
-        self.height = None
+        self.width = width
+        self.height = height
         self.text = text
 
+        self.resize(self.width, self.height)
         self.move(self.xPos, self.yPos)
         self.setText(self.text)
+
+        self.show()
+
+class Image(QLabel):
+
+    def __init__(self, parent, image, xPos, yPos, width, height):
+        QLabel.__init__(self, parent)
+
+        self.xPos = xPos
+        self.yPos = yPos
+        self.width = width
+        self.height = height
+        self.image = image
+
+        self.resize(self.width, self.height)
+        self.move(self.xPos, self.yPos)
+        self.setPixmap(QPixmap(image))
 
         self.show()
