@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton, QVBoxLayout, QWidget
 from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
 import sys
 
 class Application(QApplication):
@@ -23,55 +24,55 @@ class Window(QMainWindow):
         self.setWindowTitle(self.title)
 
         self.show()
+    
+    def setTheCentralWidget(self, object):
+        self.setCentralWidget(object)
+        
+class Layout(QWidget):
+
+    def __init__(self, parent):
+        QWidget.__init__(self, parent)
+        parent.setTheCentralWidget(self)
+
+        self.mainLayout = QVBoxLayout(self)
+        self.mainLayout.setAlignment(Qt.AlignTop)
+    
+    def toAddWidget(self, object):
+        self.mainLayout.addWidget(object)
 
 class Label(QLabel):
     
-    def __init__(self, parent, text, xPos, yPos, width, height):
-        QLabel.__init__(self, parent)
-
-        self.xPos = xPos
-        self.yPos = yPos
-        self.width = width
-        self.height = height
+    def __init__(self, parent, text):
+        super().__init__()
+        
+        parent.toAddWidget(self)
         self.text = text
 
-        self.resize(self.width, self.height)
-        self.move(self.xPos, self.yPos)
         self.setText(self.text)
 
         self.show()
 
 class Image(QLabel):
 
-    def __init__(self, parent, image, xPos, yPos, width, height):
-        QLabel.__init__(self, parent)
+    def __init__(self, parent, image):
+        super().__init__()
 
-        self.xPos = xPos
-        self.yPos = yPos
-        self.width = width
-        self.height = height
+        parent.toAddWidget(self)
         self.image = image
 
-        self.resize(self.width, self.height)
-        self.move(self.xPos, self.yPos)
         self.setPixmap(QPixmap(image))
 
         self.show()
 
 class Button(QPushButton):
 
-    def __init__(self, parent, command, text, xPos, yPos, width, height):
-        QPushButton.__init__(self, parent)
-
-        self.xPos = xPos
-        self.yPos = yPos
+    def __init__(self, parent, command, text):
+        super().__init__()
+        
+        parent.toAddWidget(self)
         self.text = text
-        self.width = width
-        self.height = height
 
         self.clicked.connect(command)
         self.setText(self.text)
-        self.resize(self.width, self.height)
-        self.move(self.xPos, self.yPos)
 
         self.show()
