@@ -10,14 +10,14 @@ class Application(QApplication):
     
 class Window(QMainWindow):
     
-    def __init__(self):
+    def __init__(self, title, width, height):
         super().__init__()
 
         self.xPos = 200
         self.yPos = 200
-        self.width = 600
-        self.height = 600
-        self.title = "Test"
+        self.width = width
+        self.height = height
+        self.title = title
 
         self.setGeometry(self.xPos, self.yPos, self.width, self.height)
         self.setWindowTitle(self.title)
