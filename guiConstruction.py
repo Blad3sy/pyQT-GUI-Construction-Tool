@@ -64,13 +64,21 @@ class Label(QLabel):
     
 class Image(QLabel):
 
-    def __init__(self, parent, image):
+    def __init__(self, parent, image, width, height, keepAspectRatio):
         super().__init__()
 
         parent.addWidget(self)
-        self.image = image
+        self.image = QPixmap(image)
+        self.width = width
+        self.height = height
+        self.keepAspectRatio = keepAspectRatio
 
-        self.setPixmap(QPixmap(image))
+        if keepAspectRatio:
+            self.image = self.image.scaled(self.width, self.height, Qt.KeepAspectRatio)
+        else:
+            self.image = self.image.scaled(self.width, self.height)
+
+        self.setPixmap(self.image)
 
         self.show()
 
