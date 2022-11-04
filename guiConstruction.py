@@ -37,18 +37,6 @@ class Layout(QVBoxLayout):
         QVBoxLayout.__init__(self, parent)
         self.setAlignment(Qt.AlignTop)
 
-class Label(QLabel):
-    
-    def __init__(self, parent, text):
-        super().__init__()
-        
-        parent.addWidget(self)
-        self.text = text
-
-        self.setText(self.text)
-
-        self.show()
-
 class Better_Window():
 
     def __init__(self, title, width, height):
@@ -61,6 +49,19 @@ class Better_Window():
         self.cen = Central_Widget(self.win)
         self.lay = Layout(self.cen)
 
+class Label(QLabel):
+    
+    def __init__(self, parent, text):
+        super().__init__()
+        
+        parent.addWidget(self)
+        self.text = text
+
+        self.setText(self.text)
+        self.setWordWrap(True)
+
+        self.show()
+    
 class Image(QLabel):
 
     def __init__(self, parent, image):
