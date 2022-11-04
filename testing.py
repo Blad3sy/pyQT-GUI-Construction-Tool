@@ -1,16 +1,15 @@
-from guiConstruction import Application, Window, Label, Image, Button, Layout
+from guiConstruction import Better_Window, Label, Image, Button
 
 def testRoutine():
     label.setText("TEST SUCCESSFUL")
 
-mainApp = Application()
-mainWin = Window("[test]", 1000, 1000)
-mainLayout = Layout(mainWin)
+mainWin = Better_Window("[TEST]", 1000, 1000)
+subWin = Better_Window("[TEST2]", 500, 500)
 
-label = Label(mainLayout, "VERY VERY VERY LONG TEXT THIS IS LONG TEXT")
+label = Label(mainWin.lay, "VERY VERY VERY LONG TEXT THIS IS LONG TEXT")
 
-image = Image(mainLayout, "pyQT-GUI-Construction-Tool/images/sunset_ocean.jpg")
+image = Image(mainWin.lay, "pyQT-GUI-Construction-Tool/images/sunset_ocean.jpg")
 
-button = Button(mainLayout, testRoutine, "click")
+button = Button(mainWin.lay, testRoutine, "click")
 
-mainApp.exit(mainApp.exec_())
+mainWin.app.exit(mainWin.app.exec_())

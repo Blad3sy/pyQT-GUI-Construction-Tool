@@ -24,40 +24,49 @@ class Window(QMainWindow):
         self.setWindowTitle(self.title)
 
         self.show()
-    
-    def setTheCentralWidget(self, object):
-        self.setCentralWidget(object)
-        
-class Layout(QWidget):
+
+class Central_Widget(QWidget):
 
     def __init__(self, parent):
         QWidget.__init__(self, parent)
-        parent.setTheCentralWidget(self)
+        parent.setCentralWidget(self)
 
-        self.mainLayout = QVBoxLayout(self)
-        self.mainLayout.setAlignment(Qt.AlignTop)
-    
-    def toAddWidget(self, object):
-        self.mainLayout.addWidget(object)
+class Layout(QVBoxLayout):
+
+    def __init__(self, parent):
+        QVBoxLayout.__init__(self, parent)
+        self.setAlignment(Qt.AlignTop)
 
 class Label(QLabel):
     
     def __init__(self, parent, text):
         super().__init__()
         
-        parent.toAddWidget(self)
+        parent.addWidget(self)
         self.text = text
 
         self.setText(self.text)
 
         self.show()
 
+class Better_Window():
+
+    def __init__(self, title, width, height):
+        self.width = width
+        self.height = height
+        self.title = title
+
+        self.app = Application()
+        self.win = Window(self.title, self.width, self.height)
+        self.cen = Central_Widget(self.win)
+        self.lay = Layout(self.cen)
+
 class Image(QLabel):
 
     def __init__(self, parent, image):
         super().__init__()
 
-        parent.toAddWidget(self)
+        parent.addWidget(self)
         self.image = image
 
         self.setPixmap(QPixmap(image))
@@ -69,7 +78,7 @@ class Button(QPushButton):
     def __init__(self, parent, command, text):
         super().__init__()
         
-        parent.toAddWidget(self)
+        parent.addWidget(self)
         self.text = text
 
         self.clicked.connect(command)
