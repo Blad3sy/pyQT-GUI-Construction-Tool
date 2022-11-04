@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
+from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QPushButton
 from PyQt5.QtGui import QPixmap
 import sys
 
@@ -55,5 +55,23 @@ class Image(QLabel):
         self.resize(self.width, self.height)
         self.move(self.xPos, self.yPos)
         self.setPixmap(QPixmap(image))
+
+        self.show()
+
+class Button(QPushButton):
+
+    def __init__(self, parent, command, text, xPos, yPos, width, height):
+        QPushButton.__init__(self, parent)
+
+        self.xPos = xPos
+        self.yPos = yPos
+        self.text = text
+        self.width = width
+        self.height = height
+
+        self.clicked.connect(command)
+        self.setText(self.text)
+        self.resize(self.width, self.height)
+        self.move(self.xPos, self.yPos)
 
         self.show()
