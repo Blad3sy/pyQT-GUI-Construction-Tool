@@ -37,7 +37,7 @@ class Layout(QVBoxLayout):
         QVBoxLayout.__init__(self, parent)
         self.setAlignment(Qt.AlignTop)
 
-class Better_Window():
+class Main_Window():
 
     def __init__(self, title, width, height):
         self.width = width
@@ -45,6 +45,17 @@ class Better_Window():
         self.title = title
 
         self.app = Application()
+        self.win = Window(self.title, self.width, self.height)
+        self.cen = Central_Widget(self.win)
+        self.lay = Layout(self.cen)
+
+class Sub_Window():
+
+    def __init__(self, title, width, height):
+        self.width = width
+        self.height = height
+        self.title = title
+
         self.win = Window(self.title, self.width, self.height)
         self.cen = Central_Widget(self.win)
         self.lay = Layout(self.cen)
