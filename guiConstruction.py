@@ -62,32 +62,48 @@ class Sub_Window():
 
 class Label(QLabel):
     
-    def __init__(self, parent, text):
+    def __init__(self, parent, text, alignment):
         super().__init__()
         
         parent.addWidget(self)
         self.text = text
+        self.alignment = alignment
 
         self.setText(self.text)
         self.setWordWrap(True)
 
         self.show()
+
+        if self.alignment == "L":
+            self.setAlignment(Qt.AlignLeft)
+        elif self.alignment == "C":
+            self.setAlignment(Qt.AlignCenter)
+        else:
+            self.setAlignment(Qt.AlignRight)
     
 class Image(QLabel):
 
-    def __init__(self, parent, image, width, height, keepAspectRatio):
+    def __init__(self, parent, image, width, height, keepAspectRatio, alignment):
         super().__init__()
 
         parent.addWidget(self)
         self.image = QPixmap(image)
         self.width = width
         self.height = height
+        self.alignment = alignment
         self.keepAspectRatio = keepAspectRatio
 
         if keepAspectRatio:
             self.image = self.image.scaled(self.width, self.height, Qt.KeepAspectRatio)
         else:
             self.image = self.image.scaled(self.width, self.height)
+
+        if self.alignment == "L":
+            self.setAlignment(Qt.AlignLeft)
+        elif self.alignment == "C":
+            self.setAlignment(Qt.AlignCenter)
+        else:
+            self.setAlignment(Qt.AlignRight)
 
         self.setPixmap(self.image)
 
